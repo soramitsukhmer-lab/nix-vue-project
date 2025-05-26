@@ -47,12 +47,6 @@
                       super.nodejs_22
                     ];
                   });
-                  # yarnConfigHook = super.yarnConfigHook.overrideAttrs (oldAttrs: {
-                  #   propagatedBuildInputs = [
-                  #     self.yarn
-                  #     self.fixup-yarn-lock
-                  #   ];
-                  # });
                 })
               ];
             };
@@ -94,16 +88,21 @@
               hash = "sha256-qGJC7kEBaEaXdHD72h6/aOgU/VlSOL1uH39nJ+nNkOM=";
             };
 
+            buildInputs = [
+              pkgs.caddy
+            ];
+
             nativeBuildInputs = [
               pkgs.yarn
               pkgs.yarnConfigHook
-              # pkgs.yarnBuildHook
-              # pkgs.yarnInstallHook
+              pkgs.yarnBuildHook
+
               # pkgs.writableTmpDirAsHomeHook
               pkgs.nodejs_22
             ];
 
             buildPhase = ''
+              mkdir -p $out
               ${pkgs.yarn}/bin/yarn build --outDir $out
             '';
 
