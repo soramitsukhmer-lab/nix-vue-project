@@ -102,8 +102,10 @@
             ];
 
             buildPhase = ''
-              mkdir -p $out
-              ${pkgs.yarn}/bin/yarn build --outDir $out
+              mkdir -p $out/{dist,bin}
+              ${pkgs.yarn}/bin/yarn build --outDir $out/dist
+              echo -e "#!/usr/bin/env bash\ncaddy file-server --browse \"\$@\" $out/dist" > $out/bin/vue-project
+
             '';
 
             meta = { };
