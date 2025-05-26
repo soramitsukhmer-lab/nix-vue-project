@@ -102,9 +102,9 @@
             ];
 
             buildPhase = ''
-              mkdir -p $out/{dist,bin}
-              ${pkgs.yarn}/bin/yarn build --outDir $out/dist
-              echo -e "#!/usr/bin/env bash\ncaddy file-server --browse \"\$@\" --root $out/dist" > $out/bin/vue-project
+              mkdir -p $out/{public,bin}
+              ${pkgs.yarn}/bin/yarn build --outDir $out/public
+              echo -e "#!/usr/bin/env bash\ncaddy file-server --browse \"\$@\" --root $out/public" > $out/bin/vue-project
               chmod +x $out/bin/vue-project
             '';
 
