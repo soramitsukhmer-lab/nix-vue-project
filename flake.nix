@@ -77,7 +77,7 @@
       packages = forEachSystem (
         { pkgs }: 
         {
-          default = pkgs.stdenv.mkDerivation (finalAttrs: {
+          default = pkgs.stdenv.mkDerivation (finalAttrs: rec {
             pname = "vue-project";
             version = "0.0.0";
 
@@ -88,7 +88,7 @@
               hash = "sha256-qGJC7kEBaEaXdHD72h6/aOgU/VlSOL1uH39nJ+nNkOM=";
             };
 
-            buildInputs = [
+            propagatedBuildInputs = [
               pkgs.caddy
             ];
 
@@ -102,10 +102,15 @@
             ];
 
             buildPhase = ''
-              mkdir -p $out/{public,bin}
+              mkdir -p $out/public
               ${pkgs.yarn}/bin/yarn build --outDir $out/public
-              echo -e "#!/usr/bin/env bash\ncaddy file-server --browse \"\$@\" --root $out/public" > $out/bin/vue-project
-              chmod +x $out/bin/vue-project
+            '';
+
+            installPhase = ''
+              mkdir -p $out/bin
+              echo "#!${pkgs.runtimeShell}" > $out/bin/${pname}
+              echo '${pkgs.caddy}/bin/caddy file-server --root "'"$out/public"'" --browse "$@"' >> $out/bin/${pname}
+              chmod +x $out/bin/${pname}
             '';
 
             meta = { };
