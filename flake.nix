@@ -97,7 +97,7 @@
               pkgs.yarnConfigHook
               pkgs.yarnBuildHook
 
-              # pkgs.writableTmpDirAsHomeHook
+              pkgs.writableTmpDirAsHomeHook
               pkgs.nodejs_22
             ];
 
