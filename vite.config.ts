@@ -4,11 +4,19 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
+// Automatic Workspace Folders
+// https://chromium.googlesource.com/devtools/devtools-frontend/+/main/docs/ecosystem/automatic_workspace_folders.md
+// 
+// chrome://flags#devtools-project-settings
+// chrome://flags#devtools-automatic-workspace-folders
+import devtoolsJson from 'vite-plugin-devtools-json';
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
+    devtoolsJson(),
   ],
   resolve: {
     alias: {
