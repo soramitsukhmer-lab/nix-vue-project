@@ -88,7 +88,7 @@
               hash = "sha256-qGJC7kEBaEaXdHD72h6/aOgU/VlSOL1uH39nJ+nNkOM=";
             };
 
-            propagatedBuildInputs = [
+            buildInputs = [
               pkgs.caddy
             ];
 
