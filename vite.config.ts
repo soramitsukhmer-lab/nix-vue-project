@@ -16,7 +16,7 @@ export default defineConfig({
   plugins: [
     vue(),
     vueDevTools(),
-    devtoolsJson(),
+    devtoolsJson(), // <- Experimental plugin for automatic workspace folders in Chrome DevTools, we don't technically need this.
   ],
   resolve: {
     alias: {
